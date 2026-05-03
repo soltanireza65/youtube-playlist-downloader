@@ -3,8 +3,8 @@ name: Download YouTube Playlist
 on:
   workflow_dispatch:
     inputs:
-      playlist_url:
-        description: "YouTube Playlist URL"
+      video_url:
+        description: "YouTube Video URL"
         required: true
         type: string
 
@@ -41,7 +41,7 @@ jobs:
           -f "bv*+ba/b" \
           -o "downloads/%(title)s.%(ext)s" \
           "${{ github.event.inputs.video_url }}"
-          
+
       - name: Debug - List files
         run: |
           echo "Contents of workspace:"
