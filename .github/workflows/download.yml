@@ -2,6 +2,10 @@ name: Download YouTube Video
 
 on:
   workflow_dispatch:
+    inputs:
+      video_url:
+        description: "YouTube video URL"
+        required: true
 
 jobs:
   download:
@@ -16,7 +20,7 @@ jobs:
           yt-dlp --cookies-from-browser chrome \
           -f "bv*+ba/b" \
           -o "downloads/%(title)s.%(ext)s" \
-          https://www.youtube.com/watch?v=VIDEO_ID
+          "${{ github.event.inputs.video_url }}"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
