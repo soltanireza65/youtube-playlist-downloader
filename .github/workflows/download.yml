@@ -27,20 +27,18 @@ jobs:
       - name: Create downloads directory
         run: mkdir -p downloads
 
-      # - name: Download playlist
-      #   run: |
-      #     yt-dlp \
-      #       -o "downloads/%(playlist_index)s - %(title)s.%(ext)s" \
-      #       --yes-playlist \
-      #       --ignore-errors \
-      #       "${{ github.event.inputs.playlist_url }}"
 
-      - name: Download video
+
+
+      - name: Download single video
         run: |
-          yt-dlp --cookies-from-browser chrome \
-          -f "bv*+ba/b" \
+          yt-dlp \
+          -f "bv*+ba/best" \
+          --merge-output-format mp4 \
           -o "downloads/%(title)s.%(ext)s" \
           "${{ github.event.inputs.video_url }}"
+
+
 
       - name: Debug - List files
         run: |
